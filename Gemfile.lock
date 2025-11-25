@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.3)
+    bigdecimal (3.3.1)
     diff-lcs (1.6.2)
     json (2.16.0)
     language_server-protocol (3.17.0.5)
@@ -63,6 +64,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bigdecimal (~> 3.1)
   rspec (~> 3.13)
   rubocop (~> 1.60)
   rubocop-rspec (~> 2.26)

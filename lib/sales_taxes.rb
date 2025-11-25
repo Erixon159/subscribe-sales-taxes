@@ -8,3 +8,6 @@ end
 require_relative 'sales_taxes/models/product'
 require_relative 'sales_taxes/models/line_item'
 require_relative 'sales_taxes/models/receipt'
+
+# Require all services
+require_relative 'sales_taxes/services/tax_calculator'
