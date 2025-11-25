@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    image: sales_taxes
+    container_name: sales_taxes_app
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+    command: ruby bin/sales_taxes
+
+  test:
+    build: .
+    image: sales_taxes
+    container_name: sales_taxes_test
+    volumes:
+      - .:/app
+    command: bundle exec rspec
+
+  lint:
+    build: .
+    image: sales_taxes
+    container_name: sales_taxes_lint
+    volumes:
+      - .:/app
+    command: bundle exec rubocop

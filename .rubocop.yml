@@ -1,0 +1,21 @@
+require:
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+
+# Disable cops for gems we're not using
+RSpec/Capybara:
+  Enabled: false
+
+RSpec/FactoryBot:
+  Enabled: false
+
+RSpec/Rails:
+  Enabled: false
+
+Lint/ScriptPermission:
+  Enabled: false
