@@ -34,12 +34,20 @@ RSpec/ExampleLength:
     - 'spec/properties/**/*'
 
 RSpec/MultipleExpectations:
+  Max: 5
   Exclude:
     - 'spec/properties/**/*'
 
 RSpec/ExpectActual:
   Exclude:
     - 'spec/properties/**/*'
+
+RSpec/IteratedExpectation:
+  Exclude:
+    - 'spec/properties/**/*'
+
+RSpec/IndexedLet:
+  Enabled: false
 
 RSpec/MultipleMemoizedHelpers:
   Max: 8
