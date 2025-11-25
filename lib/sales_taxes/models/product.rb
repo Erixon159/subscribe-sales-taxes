@@ -16,7 +16,6 @@ module SalesTaxes
         freeze
       end
 
-      # Returns true if the product is exempt from basic sales tax
       def exempt?
         EXEMPT_CATEGORIES.include?(category)
       end

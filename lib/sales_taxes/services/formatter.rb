@@ -17,12 +17,10 @@ module SalesTaxes
         lines.join("\n")
       end
 
-      # Formats a single line item
       def self.format_line_item(line_item)
         "#{line_item.quantity} #{line_item.product.name}: #{format_price(line_item.total_price)}"
       end
 
-      # Formats a price with exactly 2 decimal places
       def self.format_price(price)
         Kernel.format('%.2f', price)
       end

@@ -11,12 +11,10 @@ module SalesTaxes
         freeze
       end
 
-      # Returns the sum of all line item tax amounts
       def total_taxes
         line_items.sum(&:tax_amount)
       end
 
-      # Returns the sum of all line item total prices
       def total
         line_items.sum(&:total_price)
       end
