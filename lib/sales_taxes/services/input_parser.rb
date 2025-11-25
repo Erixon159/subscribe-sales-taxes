@@ -5,6 +5,7 @@ module SalesTaxes
     # Parses input lines into structured product data
     class InputParser
       # Keywords that indicate product categories
+      #
       # Note: For a better product categorization, we could use a small LLM running as a service
       BOOK_KEYWORDS = %w[book].freeze
       FOOD_KEYWORDS = %w[chocolate chocolates bar].freeze
@@ -22,7 +23,7 @@ module SalesTaxes
         before_at = line[0...last_at_index].strip
         after_at = line[(last_at_index + 4)..].strip
 
-        # Parse quantity (first word before "at")
+        # Parse quantity
         match = before_at.match(/^(\d+)\s+(.+)$/)
         return nil unless match
 
@@ -33,7 +34,9 @@ module SalesTaxes
         return nil unless after_at.match?(/^\d+(\.\d+)?$/)
 
         price = after_at
-        imported = product_name.include?('imported')
+        # Check if "imported" appears at the beginning to avoid false positives
+        # (e.g., "book about imported goods" should not be marked as imported)
+        imported = product_name.start_with?('imported ')
         category = infer_category(product_name)
 
         {

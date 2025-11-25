@@ -81,6 +81,18 @@ RSpec.describe SalesTaxes::Services::InputParser do
           category: :other
         )
       end
+
+      it 'does not detect "imported" in the middle of product name' do
+        result = described_class.parse_line('1 book about imported goods at 15.00')
+
+        expect(result).to eq(
+          quantity: 1,
+          name: 'book about imported goods',
+          price: '15.00',
+          imported: false,
+          category: :book
+        )
+      end
     end
 
     context 'with category detection' do
