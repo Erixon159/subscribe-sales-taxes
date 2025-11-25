@@ -8,6 +8,9 @@ AllCops:
     - 'vendor/**/*'
 
 # Disable cops for gems we're not using
+Capybara/RSpec/PredicateMatcher:
+  Enabled: false
+
 RSpec/Capybara:
   Enabled: false
 
