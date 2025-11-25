@@ -1,4 +1,24 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-puts 'Sales Taxes Application - Coming Soon'
+require_relative '../lib/sales_taxes'
+
+# Read input from STDIN or file argument
+input_lines = if ARGV.empty?
+                $stderr.puts 'Sales Taxes Calculator'
+                $stderr.puts 'Enter items (format: quantity product_name at price)'
+                $stderr.puts 'Press Enter on an empty line when done.'
+                $stderr.puts
+
+                lines = []
+                while (line = $stdin.gets)
+                  break if line.strip.empty?
+
+                  lines << line
+                end
+                lines
+              else
+                File.readlines(ARGV[0])
+              end
+
+puts SalesTaxes.process(input_lines)

@@ -1,0 +1,7 @@
+2 book at 12.49
+this is not valid input
+1 music CD at 14.99
+
+1 chocolate bar at 0.85
+book at 5.00
+1 item with no price

@@ -6,6 +6,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - 'vendor/**/*'
+    - 'bin/**/*'
 
 # Disable cops for gems we're not using
 Capybara/RSpec/PredicateMatcher:
@@ -23,15 +24,17 @@ RSpec/Rails:
 Lint/ScriptPermission:
   Enabled: false
 
-# Property tests need more flexibility
+# Property tests and integration tests need more flexibility
 RSpec/DescribeClass:
   Exclude:
     - 'spec/properties/**/*'
+    - 'spec/integration/**/*'
 
 RSpec/ExampleLength:
   Max: 10
   Exclude:
     - 'spec/properties/**/*'
+    - 'spec/integration/**/*'
 
 RSpec/MultipleExpectations:
   Max: 5
@@ -60,3 +63,4 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Exclude:
     - 'lib/sales_taxes/services/input_parser.rb'
+    - 'lib/sales_taxes/services/receipt_builder.rb'

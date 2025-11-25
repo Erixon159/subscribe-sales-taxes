@@ -28,25 +28,25 @@ module SalesTaxes
         return BigDecimal('0') if product.exempt?
 
         base_price_bd = BigDecimal(product.base_price.to_s)
-        round_up_to_nearest_nickel(base_price_bd * BASIC_TAX_RATE).to_f
+        round_up_to_nearest_nickel(base_price_bd * BASIC_TAX_RATE)
       end
 
       # Calculates import duty (5% for imported products)
       def self.calculate_import_duty(product)
-        return BigDecimal('0').to_f unless product.imported
+        return BigDecimal('0') unless product.imported
 
         base_price_bd = BigDecimal(product.base_price.to_s)
-        round_up_to_nearest_nickel(base_price_bd * IMPORT_DUTY_RATE).to_f
+        round_up_to_nearest_nickel(base_price_bd * IMPORT_DUTY_RATE)
       end
 
       # Calculates total tax for a product (rounds each component individually)
-      def self.calculate_tax(product)
+      def self.calculate_total_tax(product)
         calculate_basic_tax(product) + calculate_import_duty(product)
       end
 
       # Calculates total tax for a line item (product tax * quantity)
       def self.calculate_line_tax(product, quantity)
-        calculate_tax(product) * quantity
+        calculate_total_tax(product) * quantity
       end
     end
   end

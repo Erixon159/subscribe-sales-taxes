@@ -80,7 +80,7 @@ RSpec.describe 'Tax Calculation Properties' do
 
         basic_tax = SalesTaxes::Services::TaxCalculator.calculate_basic_tax(product)
         import_duty = SalesTaxes::Services::TaxCalculator.calculate_import_duty(product)
-        total_tax = SalesTaxes::Services::TaxCalculator.calculate_tax(product)
+        total_tax = SalesTaxes::Services::TaxCalculator.calculate_total_tax(product)
 
         # Verify total equals sum of individually rounded components
         expect(total_tax).to eq(basic_tax + import_duty)
