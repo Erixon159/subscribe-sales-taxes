@@ -82,19 +82,19 @@ RSpec.describe SalesTaxes::Services::TaxCalculator do
     end
   end
 
-  describe '.calculate_tax' do
+  describe '.calculate_total_tax' do
     it 'returns 0 for exempt non-imported products' do
-      tax = described_class.calculate_tax(exempt_product)
+      tax = described_class.calculate_total_tax(exempt_product)
       expect(tax).to eq(0.0)
     end
 
     it 'returns basic tax for non-exempt non-imported products' do
-      tax = described_class.calculate_tax(non_exempt_product)
+      tax = described_class.calculate_total_tax(non_exempt_product)
       expect(tax).to eq(1.50)
     end
 
     it 'returns import duty for exempt imported products' do
-      tax = described_class.calculate_tax(imported_exempt_product)
+      tax = described_class.calculate_total_tax(imported_exempt_product)
       expect(tax).to eq(0.50)
     end
 
@@ -102,7 +102,7 @@ RSpec.describe SalesTaxes::Services::TaxCalculator do
       # Basic: 47.50 * 0.10 = 4.75
       # Import: 47.50 * 0.05 = 2.375 → 2.40
       # Total: 4.75 + 2.40 = 7.15
-      tax = described_class.calculate_tax(imported_non_exempt_product)
+      tax = described_class.calculate_total_tax(imported_non_exempt_product)
       expect(tax).to eq(7.15)
     end
   end
@@ -132,7 +132,7 @@ RSpec.describe SalesTaxes::Services::TaxCalculator do
     end
 
     it 'handles zero price' do
-      tax = described_class.calculate_tax(zero_price_product)
+      tax = described_class.calculate_total_tax(zero_price_product)
       expect(tax).to eq(0.0)
     end
 
@@ -140,7 +140,7 @@ RSpec.describe SalesTaxes::Services::TaxCalculator do
       # Basic: 1000 * 0.10 = 100.00
       # Import: 1000 * 0.05 = 50.00
       # Total: 150.00
-      tax = described_class.calculate_tax(expensive_product)
+      tax = described_class.calculate_total_tax(expensive_product)
       expect(tax).to eq(150.00)
     end
   end

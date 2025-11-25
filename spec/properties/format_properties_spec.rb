@@ -55,4 +55,44 @@ RSpec.describe 'Format Properties' do
       end
     end
   end
+
+  describe 'End-to-End Calculation Accuracy' do
+    it 'verifies receipt totals match sum of line items' do
+      100.times do
+        num_lines = rand(1..5)
+        input_lines = num_lines.times.map do
+          quantity = rand(1..10)
+          categories = %i[book food medical other]
+          category = categories.sample
+          imported = [true, false].sample
+          price = (rand(1..10_000) / 100.0).round(2)
+
+          product_name = case category
+                         when :book
+                           imported ? 'imported book' : 'book'
+                         when :food
+                           imported ? 'imported box of chocolates' : 'chocolate bar'
+                         when :medical
+                           imported ? 'imported packet of pills' : 'packet of headache pills'
+                         else
+                           imported ? 'imported bottle of perfume' : 'bottle of perfume'
+                         end
+
+          "#{quantity} #{product_name} at #{format('%.2f', price)}"
+        end
+
+        # Process through the full pipeline
+        receipt = SalesTaxes::Services::ReceiptBuilder.build_from_input(input_lines)
+        line_items = receipt.line_items
+
+        # Verify sum of line item totals equals receipt total
+        expected_total = line_items.sum(&:total_price)
+        expect(receipt.total).to be_within(0.01).of(expected_total)
+
+        # Verify sum of line item taxes equals receipt total taxes
+        expected_taxes = line_items.sum(&:tax_amount)
+        expect(receipt.total_taxes).to be_within(0.01).of(expected_taxes)
+      end
+    end
+  end
 end
