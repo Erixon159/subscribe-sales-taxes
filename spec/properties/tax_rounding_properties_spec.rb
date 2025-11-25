@@ -3,9 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe 'Tax Rounding Properties' do
-  # Feature: sales-taxes, Property 5: Tax Rounding Always Rounds Up
-  # Validates: Requirements 2.3, 3.3, 4.1
-  describe 'Property 5: Tax Rounding Always Rounds Up' do
+  describe 'Tax Rounding Always Rounds Up' do
     it 'always rounds up to the nearest 0.05 for random tax amounts' do
       # Generate 100 random tax amounts between 0.01 and 100.00
       100.times do
