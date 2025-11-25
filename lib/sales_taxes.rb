@@ -6,3 +6,4 @@ end
 
 # Require all models
 require_relative 'sales_taxes/models/product'
+require_relative 'sales_taxes/models/line_item'
