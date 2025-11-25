@@ -37,5 +37,18 @@ RSpec/MultipleExpectations:
   Exclude:
     - 'spec/properties/**/*'
 
+RSpec/ExpectActual:
+  Exclude:
+    - 'spec/properties/**/*'
+
 RSpec/MultipleMemoizedHelpers:
   Max: 8
+
+# Parsing methods naturally have higher complexity
+Metrics/AbcSize:
+  Exclude:
+    - 'lib/sales_taxes/services/input_parser.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/sales_taxes/services/input_parser.rb'

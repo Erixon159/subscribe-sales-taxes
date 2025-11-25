@@ -7,7 +7,6 @@ RSpec.describe 'Tax Calculation Properties' do
     it 'always returns zero basic tax for exempt products' do
       exempt_categories = %i[book food medical]
 
-      # Generate 100+ random exempt products
       100.times do
         category = exempt_categories.sample
         price = rand(0.01..1000.00)
@@ -30,7 +29,6 @@ RSpec.describe 'Tax Calculation Properties' do
     it 'applies correct tax percentages for all product combinations' do
       categories = %i[book food medical other]
 
-      # Generate 100+ random products with all combinations
       100.times do
         category = categories.sample
         price = rand(0.01..1000.00)
@@ -50,7 +48,6 @@ RSpec.describe 'Tax Calculation Properties' do
         if product.exempt?
           expect(basic_tax).to eq(0.0)
         else
-          # Basic tax should be approximately 10% (before rounding it's exactly 10%)
           expected_basic = BigDecimal(price.to_s) * BigDecimal('0.10')
           rounded_basic = SalesTaxes::Services::TaxCalculator.round_up_to_nearest_nickel(expected_basic)
           expect(basic_tax).to eq(rounded_basic.to_f)
@@ -70,7 +67,6 @@ RSpec.describe 'Tax Calculation Properties' do
 
   describe 'Individual Tax Component Rounding' do
     it 'rounds each tax component individually before summing' do
-      # Generate 100+ products with multiple applicable taxes
       100.times do
         price = rand(0.01..1000.00)
 
