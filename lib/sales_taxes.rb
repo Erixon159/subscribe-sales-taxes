@@ -11,3 +11,4 @@ require_relative 'sales_taxes/models/receipt'
 
 # Require all services
 require_relative 'sales_taxes/services/tax_calculator'
+require_relative 'sales_taxes/services/input_parser'
